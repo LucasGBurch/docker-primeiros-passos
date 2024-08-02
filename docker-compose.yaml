@@ -10,6 +10,22 @@ services:
       - MYSQL_DATABASE=rocketseat-db
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=root
-# networks:
+    networks:
+      - primeira-network
 
-# volumes:
+  api-rocket:
+    build:
+      context: .
+    container_name: api-rocket
+    ports:
+      - 3001:3000
+    depends_on:
+      - mysql
+    networks:
+      - primeira-network
+
+networks:
+  primeira-network:
+    name: primeira-network
+    external: true
+    driver: bridge
